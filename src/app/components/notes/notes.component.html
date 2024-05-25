@@ -1,0 +1,34 @@
+<div class="row notes-container">
+    <div class="col-lg-2">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-lg-10 content-card">
+        <ol class="list-unstyled px-3 d-flex justify-content-between">
+            <li>
+                <button [ngStyle]="{'backgroundColor':'#FC6736'}" class="text-white btn" mat-raised-button (click)="openDialog()" >Add</button>
+            </li>
+            <li>
+                <input type="search" [(ngModel)]="searchValue" name="search" class="form-control" placeholder="search">
+            </li>
+        </ol>
+
+        <div class="row justify-content-center p-3  ">
+            <div   class=" card-big-shadow col-md-3 col-lg-4" *ngFor="let note of allNotes | search :searchValue;index as i">
+                <div class="card card-just-text" data-background="color" data-color="yellow" data-radius="none">
+                    <div class="content">
+                        <h4 class="title text-black"> {{note.title}} </h4>
+                        <p class="description"> {{note.content}} </p>
+                        <div class="d-flex justify-content-evenly gap-2">
+                            <button class="btn p-0" (click)="updateNote(note,i)">
+                                <i  class="fa-solid fa-pen-to-square text-primary cursor-pointer"></i>
+                            </button>
+                            <button class="btn p-0" (click)="deleteNote(note._id,i)">
+                                <i class="fa-solid fa-trash text-danger cursor-pointer"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>

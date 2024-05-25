@@ -1,0 +1,90 @@
+<section class="d-flex align-items-center vh-100 my-5">
+
+    <div class="container boxShadow justify-content-center align-items-center">
+        <div class="row ">
+            <div class="col-md-6">
+                    <h2 class="form-title">SignUp</h2>
+                    <form action="" [formGroup]="signupForm" (ngSubmit)="handelSignup(signupForm)">
+
+                        <div class=" position-relative">
+                            <label for="name"><i class="fa-solid fa-user"></i></label>
+                            <input #inputName formControlName="name" type="text" name="name" class="form-control border-0 border-bottom rounded-0 border-dark-subtle " id="name" placeholder="Your Name....">
+                        </div>
+                        <!-- handel error with regex and use realtime calidation -->
+                        <div class="alet" *ngIf="signupForm.get('name')?.errors && ( signupForm.get('name')?.touched || inputName.value.length>0) ">
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('name')?.getError('required')"><span class="text-danger">*</span> Required</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('name')?.getError('minlength')"><span class="text-danger">*</span> Min length 3 letter</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('name')?.getError('maxlength')"><span class="text-danger">*</span> Max length 20 letter</p>
+                        </div>
+
+                        <div class=" position-relative">
+                            <label for="email"><i class="fa-solid fa-envelope"></i></label>
+                            <input #inputEmail formControlName="email" type="text" name="email" class="form-control border-0 border-bottom rounded-0 border-dark-subtle " id="email" placeholder="Email....">
+                        </div>
+                          <!-- handel error with regex and use realtime calidation -->
+                          <div class="alet" *ngIf="signupForm.get('email')?.errors && ( signupForm.get('email')?.touched || inputEmail.value.length>0) ">
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('email')?.getError('required')"><span class="text-danger">*</span> Required</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('email')?.getError('email')"><span class="text-danger">*</span> Enter Valid Email</p>
+                        </div>
+
+                        <div class=" position-relative">
+                            <label for="phone"><i class="fa-solid fa-lock"></i></label>
+                            <div>
+                                <input #inputPass #pass formControlName="password" type="password" name="password"class="form-control border-0 border-bottom rounded-0 border-dark-subtle" id="password" placeholder="**************">
+                                <span (click)="passwordShow = true; passwordShow == true? (pass.type = 'text'): (pass.type = 'password')" [ngClass]="{'d-none': passwordShow}" role="button" class="position-absolute top-50 end-0 translate-middle-y me-2"><i class="fas fa-eye"></i></span>
+                                <span (click)="passwordShow = false;passwordShow == false? (pass.type = 'password'): (pass.type = 'text')" [ngClass]="{'d-none': !passwordShow}" role="button" class="position-absolute top-50 end-0 translate-middle-y me-2"><i class="fas fa-eye-slash"></i></span>
+                            </div>
+                        </div>
+                         <!-- handel error with regex and use realtime calidation -->
+                         <div class="alet" *ngIf="signupForm.get('password')?.errors && ( signupForm.get('password')?.touched || inputPass.value.length>0) ">
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('password')?.getError('required')"><span class="text-danger">*</span> Required</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('password')?.getError('pattern')">
+                                <span class="text-danger">*</span>Must start with Capital letter <br>
+                                <span class="text-danger">*</span>contains more than 4 letter <br>
+                                <span class="text-danger">*</span>max length 13 character <br>
+                                <span class="text-danger">*</span>don't use special character <br>
+                            </p>
+                        </div>
+
+                        <div class=" position-relative">
+                            <label for="phone"><i class="fa-solid fa-phone"></i></label>
+                            <input #inputPhone formControlName="phone" type="text"  name="name" class="form-control border-0 border-bottom rounded-0 border-dark-subtle " id="phone" placeholder="Phone....">
+                        </div>
+                         <!-- handel error with regex and use realtime calidation -->
+                         <div class="alet" *ngIf="signupForm.get('phone')?.errors && ( signupForm.get('phone')?.touched || inputPhone.value.length>0) ">
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('phone')?.getError('required')"><span class="text-danger">*</span> Required</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('phone')?.getError('pattern')"><span class="text-danger">*</span> Accept only Egypt number </p>
+                        </div>
+
+                        <div class=" position-relative">
+                            <label for="age"><i class="fa-solid fa-cake-candles"></i></label>
+                            <input #inputAge formControlName="age" type="number" name="name" class="form-control border-0 border-bottom rounded-0 border-dark-subtle " id="age" placeholder="Age....">
+                        </div>
+                           <!-- handel error with regex and use realtime calidation -->
+                           <div class="alet" *ngIf="signupForm.get('age')?.errors && ( signupForm.get('age')?.touched || inputAge.value.length>0) ">
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('age')?.getError('required')"><span class="text-danger">*</span> Required</p>
+                            <p class="fs-sm text-muted" *ngIf="signupForm.get('age')?.getError('pattern')"><span class="text-danger">*</span> Age Between 20 and 80 </p>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button [disabled]="signupForm.invalid" class="btn btn-danger btn-sm mt-3"><i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i><span *ngIf="!isLoading"> SignUp </span> </button>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-center align-items-center flex-column mt-4 ">
+                        <span class="mb-3 fs-5">Signin With</span>
+                        <ul class=" socials d-flex justify-content-evenly list-unstyled gap-3">
+                            <li> <a target="_blank" class="text-decoration-none" href="https://github.com/obiedtaha/"><i class="fa-brands fa-github githubIcon"></i></a> </li>
+                            <li> <a target="_blank" class="text-decoration-none" href="https://x.com/ObiedRamadan"><i class="fa-brands fa-twitter twitterIcon"></i>  </a> </li>
+                            <li> <a target="_blank" class="text-decoration-none" href="https://www.linkedin.com/in/obaid-ramadan-56a144180/"><i class="fa-brands fa-linkedin linkedinIcon"></i></a> </li>
+                        </ul>
+                        <p>Already Have an account? <a role="button" class="text-info" routerLink="/signin">Singin</a> </p>
+
+                    </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center ">
+                <figure> <img src="./assets/images/signup-image.jpg" class="w-100" alt="signin"></figure>
+            </div>
+        </div>
+    </div>
+
+</section>

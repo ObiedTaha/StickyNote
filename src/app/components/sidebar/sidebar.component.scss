@@ -1,0 +1,32 @@
+.sidenav-bar {
+    padding: 10px;
+    background-color: #0c2D57;
+
+    ul {
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px
+    }
+
+    ul>button:not(span) {
+        font-size: 18px;
+        text-align: center;
+        color: white;
+        background-color: #fc6736;
+        border: 3px solid #fc6736;
+        padding: 15px;
+        border-radius: 15px;
+        width: 50%;
+        transition: all .5s;
+    }
+
+    ul>button:hover {
+        width: 100%;
+    }
+
+
+
+
+}
