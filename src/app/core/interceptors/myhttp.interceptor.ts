@@ -13,14 +13,6 @@ export class MyhttpInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // if(localStorage.getItem('token')!==null){
-    //   const myToken: any = { token: localStorage.getItem('token') };
-
-    //   request = request.clone({
-    //     setHeaders: myToken
-    //   })
-    // }
-
 
     if (localStorage.getItem('token') !== null) {
       const myToken: any = {token: localStorage.getItem('token')};
