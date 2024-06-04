@@ -5,7 +5,7 @@ import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',canActivate:[authGuard], loadComponent: () => import('./layouts/blanklayout/blanklayout.component').then((m) => m.BlanklayoutComponent), children: [
+    path: '', loadComponent: () => import('./layouts/blanklayout/blanklayout.component').then((m) => m.BlanklayoutComponent), children: [
       { path: '', redirectTo: 'note', pathMatch: 'full' },
       { path: 'sidebar', loadComponent: () => import('./components/sidebar/sidebar.component').then((m) => m.SidebarComponent), title: 'Side Bar' },
       { path: 'note', loadComponent: () => import('./components/notes/notes.component').then((m) => m.NotesComponent), title: 'Notes' },

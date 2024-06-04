@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoteService } from 'src/app/core/services/note.service';
 import { Inote } from 'src/app/core/interfaces/inote';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog',
@@ -19,7 +20,7 @@ import { Inote } from 'src/app/core/interfaces/inote';
 })
 export class DialogComponent {
   constructor(private _FormBuilder: FormBuilder, private _NoteService: NoteService, public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Inote) {
+    @Inject(MAT_DIALOG_DATA) public data: Inote,private _Router:Router,) {
 
   }
 
@@ -41,13 +42,19 @@ export class DialogComponent {
 
 
   addNewNote(newNote: Inote): void {
-    this._NoteService.AddNote(newNote).subscribe({
-      next: (response) => {
-        if (response.msg == 'done') {
-          this.dialogRef.close();
+    if(''|| null !=localStorage.getItem('token')){
+
+      this._NoteService.AddNote(newNote).subscribe({
+        next: (response) => {
+          if (response.msg == 'done') {
+            this.dialogRef.close();
+          }
         }
-      }
-    })
+      })
+    }else{
+      this._Router.navigate(['/signin']);
+      this.dialogRef.close();
+    }
   };
 
   updateNote(newNote: Inote): void {
